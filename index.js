@@ -94,8 +94,13 @@ const handlers = {
         // Create speech output
         const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
 
+        var imageObj = {
+            smallImageUrl: 'https://s3.amazonaws.com/chicagobaseballskill/chicagoBaseball-medium.png',
+            largeImageUrl: 'https://s3.amazonaws.com/chicagobaseballskill/chicagoBaseball-large.png'
+        };
+
 	VoiceLabs.track(this.event.session, 'QuoteFact', null, speechOutput, (error, response) => {
-            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
+            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact, imageObj);
 	});
     },
     'AMAZON.HelpIntent': function () {
@@ -122,4 +127,3 @@ exports.handler = (event, context) => {
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
-
